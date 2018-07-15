@@ -1,0 +1,53 @@
+ <?import javafx.scene.layout.GridPane?>
+        <?import javafx.scene.control.TextField?>
+        <?import javafx.scene.control.Button?>
+        <?import javafx.event.ActionEvent?>
+
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" >
+
+<TextField GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="field"
+           onKeyReleased="#handleKeyReleased"/>
+<Button text="me" fx:id="me" onAction="#onButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+<Button text="you"  fx:id="you" onAction="#onButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+</GridPane>
+//--------------------------------------------
+//controller.java
+package sample;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+public class Controller {
+    @FXML
+    private TextField field;
+    @FXML
+    private Button me;
+    @FXML
+    private Button you;
+    @FXML
+    public void  onButtonClicked(ActionEvent e){
+
+        if(e.getSource().equals(me)){
+            System.out.println("me  Button is clicked");
+            field.setText("me  Button is clicked");
+        }
+        if(e.getSource().equals(you)){
+          System.out.println("YOUR Button is clicked");
+            field.setText("YOu  Button is clicked");
+        }
+    }
+    @FXML
+    public void initialize(){
+
+        me.setDisable(true);
+        you.setDisable(true);
+  }
+    @FXML
+    public void handleKeyReleased(){
+        String text=field.getText();
+        boolean disableButtons=text.isEmpty()||text.trim().isEmpty();
+        me.setDisable(disableButtons);
+        you.setDisable(disableButtons);
+    }
+}
